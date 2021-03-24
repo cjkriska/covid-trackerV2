@@ -12,8 +12,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
+
+// --------- NOT BEING USED -------------------------
+// --------------------------------------------------
 // The app.get function runs when '/api/hello' is requested from the browser.
-// This is requested in App.js when the page loads initially
 // It will return an array of province names (states)
 app.get('/api/hello', (req, res) => {
     // This is the Corona API url that the data is requested from
@@ -35,18 +37,20 @@ app.get('/api/hello', (req, res) => {
             for(let i=0; i < covidData.length; i++) {
                 provinceList.push(covidData[i].state);
             }
-            // Sends the provinceList back to the front end (App.js) where it was called in callApi
+            // Sends the provinceList back to the front end, where it was called
             res.send(
                 {express: provinceList}
             );
         });
     });
 });
+// --------------------------------------------------
+// --------------------------------------------------
 
 
 // The app.post function will run when '/api/world' is requested from the browser
 // This is requested in App.js when the submit button is pressed (when handleSubmit is called)
-// It returns the data requested for the province selected in the dropdown menu
+// It returns the data requested for the province selected
 app.post('/api/world', (req, res) => {
     // Saves the selected province as provinceName
     let provinceName = req.body.post;
@@ -70,6 +74,7 @@ app.post('/api/world', (req, res) => {
                     cases = provinceData[i].cases;
                     deaths = provinceData[i].deaths;
 
+                    // Saves data for selected province in a JS Object
                     resp = {
                         province: provinceName,
                         cases: cases,
@@ -80,7 +85,7 @@ app.post('/api/world', (req, res) => {
                 }
             }
 
-            // Sends the cases and deaths back to App.js
+            // Sends the province name, cases, and deaths back to UsMap.js
             res.send(resp);
 
         });
