@@ -2,5 +2,12 @@
 [X] Move formatting function to a component
 [X] Comment Code
 [] Find and use alternate SVG map
+[] Resize Map
 [] Read SVG from file instead of API?
 [] Find way to run faster - reimplement formatting function in UsMap.js?
+[] Display all required data
+    [X] Positive Results
+    [] Recoveries
+    [] Active Cases
+    [] Vaccinations
+    [X] Deaths

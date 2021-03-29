@@ -49,7 +49,7 @@ app.get('/api/hello', (req, res) => {
 
 
 // The app.post function will run when '/api/world' is requested from the browser
-// This is requested in App.js when the submit button is pressed (when handleSubmit is called)
+// This is requested in UsMap.js when a state is clicked (when handleClick is called)
 // It returns the data requested for the province selected
 app.post('/api/world', (req, res) => {
     // Saves the selected province as provinceName
@@ -65,6 +65,8 @@ app.post('/api/world', (req, res) => {
         response.on("end", () => {
             let cases = "";
             let deaths = "";
+            let recoveries = "";
+            let activeCases = "";
             let resp = {};
             const provinceData = JSON.parse(data);
             // Goes through the data for each province. If the selected provinceName
@@ -73,12 +75,16 @@ app.post('/api/world', (req, res) => {
                 if(provinceName === provinceData[i].state) {
                     cases = provinceData[i].cases;
                     deaths = provinceData[i].deaths;
+                    recoveries = provinceData[i].recovered;
+                    activeCases = provinceData[i].active;
 
                     // Saves data for selected province in a JS Object
                     resp = {
                         province: provinceName,
                         cases: cases,
-                        deaths: deaths
+                        deaths: deaths,
+                        recoveries: recoveries,
+                        activeCases: activeCases
                     }
                     // Logs the full data for the province in the console (for debugging)
                     console.log(provinceData[i]);
