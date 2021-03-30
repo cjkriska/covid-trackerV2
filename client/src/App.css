@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(230, 238, 255);
+}
+
 .App {
   text-align: center;
 }
@@ -36,4 +40,36 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.main {
+  width: 98%;
+}
+
+.map {
+  display: inline-block;
+  width: 70%;
+}
+
+.state-info {
+  display: inline-block;
+  width: 30%;
+}
+
+.state-card {
+  background-color: rgb(204, 242, 252);
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+}
+
+.card-heading {
+  margin-bottom: 0;
+}
+
+hr {
+  margin-top: 0;
+  margin-left: 5px;
+  margin-right: 5px;
 }

@@ -1,13 +1,11 @@
 [X] Refactor/Reformat, get rid of any unused code, too many component levels? Get rid of Map?
 [X] Move formatting function to a component
 [X] Comment Code
-[] Find and use alternate SVG map
-[] Resize Map
-[] Read SVG from file instead of API?
+[X] Resize Map
 [] Find way to run faster - reimplement formatting function in UsMap.js?
 [] Display all required data
     [X] Positive Results
-    [] Recoveries
-    [] Active Cases
+    [X] Recoveries
+    [X] Active Cases
     [] Vaccinations
     [X] Deaths

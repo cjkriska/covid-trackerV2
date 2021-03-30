@@ -28,17 +28,18 @@ function UsMap(props) {
         let resp = JSON.parse(body);
         // Sets responseToPost variable as the resp object returned from server.js
         setResponseToPost(resp);
-
     };
 
 
     // Renders the state card with covid data (state name, cases, and deaths)
     // Also renders the individual states with properties required for identification and function
     return (
-        <>  
-            <div><StateCard respo={responseToPost} /></div>
-            <svg viewBox="0 0 960 600">
-                {statesData.map((stateData, index) => 
+        <>
+        <div className="main">
+            <div className="map"> 
+                <svg width="90%" viewBox="0 0 960 600">
+                    {statesData.map((stateData, index) => 
+                    
                     <path
                         className="path-class"
                         style={{cursor: "pointer", fill: "purple"}}
@@ -58,7 +59,12 @@ function UsMap(props) {
                     </path>
                 )
                 }
-            </svg>
+                </svg>
+            </div>
+            <div className="state-info">
+                <StateCard className="state-card" respo={responseToPost} />
+            </div>
+        </div>
         </>
     );
 

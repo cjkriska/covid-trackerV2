@@ -15,15 +15,16 @@ function StateCard(props) {
 
     // Renders the formatting for the State Card
     return (
-        <>
-            <h3>{province}: </h3>
+        <div className={props.className}>
+            <h2 className="card-heading">{province}</h2>
+            <hr />
             <p>
-                Cases: {cases.toLocaleString()}<br />
-                Deaths: {deaths.toLocaleString()}<br />
-                Recoveries: {recoveries.toLocaleString()}<br />
-                Active Cases: {activeCases.toLocaleString()}
+                <b>Cases:</b> {cases.toLocaleString()}<br />
+                <b>Deaths:</b> {deaths.toLocaleString()}<br />
+                <b>Recoveries:</b> {recoveries.toLocaleString()}<br />
+                <b>Active Cases:</b> {activeCases.toLocaleString()}
             </p>
-        </>
+        </div>
     );
 
 }
