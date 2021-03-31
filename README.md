@@ -1,5 +1,7 @@
 # Covid Tracker V2
 
+## Available Here: [Covid-19 Tracker](https://us-covid-19-tracker.herokuapp.com/)
+
 ## Setup
 1. Install Node.js (https://nodejs.org/)
 2. Open Command Prompt/Terminal and cd to covid-trackerV2-main file
