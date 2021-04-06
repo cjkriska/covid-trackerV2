@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import UsMap from './UsMap.js';
+import Data from '../usStateData';
 
 // Main Component - Renders map from SVG data
 function App() {
@@ -11,9 +12,7 @@ function App() {
     // Grabs stateData SVG image data and sets it to statesData variable
     useEffect(() => {
         (async () => {
-            const res = await fetch('https://willhaley.com/assets/united-states-map-react/states.json');
-            const statesData = await res.json();
-            setStatesData(statesData);
+            setStatesData(Data);
         })();
     }, []);
 

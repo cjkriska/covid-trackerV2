@@ -9,3 +9,4 @@
     [X] Active Cases
     [] Vaccinations
     [X] Deaths
+[] Fix Colorado & Massechusetts bug
