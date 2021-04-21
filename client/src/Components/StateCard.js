@@ -11,7 +11,7 @@ function StateCard(props) {
 
     // Renames the inputted props.respo as its object properties:
     // province, cases, and deaths
-    const {province, cases, deaths, recoveries, activeCases} = props.respo;
+    const {province, cases, deaths, recoveries, activeCases} = props.respo.current;
 
     // Renders the formatting for the State Card
     return (

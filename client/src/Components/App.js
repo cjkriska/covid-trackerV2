@@ -11,9 +11,7 @@ function App() {
 
     // Grabs stateData SVG image data and sets it to statesData variable
     useEffect(() => {
-        (async () => {
-            setStatesData(Data);
-        })();
+        setStatesData(Data);
     }, []);
 
     // If there is currently no statesData, displays loading

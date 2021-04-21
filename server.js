@@ -49,13 +49,24 @@ app.get('/api/hello', (req, res) => {
 // --------------------------------------------------
 
 
-// The app.post function will run when '/api/world' is requested from the browser
+
+
+
+
+
+// The app.post function will run when '/api/current' is requested from the browser
 // This is requested in UsMap.js when a state is clicked (when handleClick is called)
 // It returns the data requested for the province selected
-app.post('/api/world', (req, res) => {
+app.post('/api/current', (req, res) => {
     // Saves the selected province as provinceName
-    let provinceName = req.body.post;
-    const url = "https://disease.sh/v2/states?sort=&yesterday=";
+    let provinceId = req.body.post.stateId;
+    let provinceName = req.body.post.stateName;
+    const apiKey = "98bcd96f014240558f710ccd0b52b612";
+    const url = "https://api.covidactnow.org/v2/state/" + provinceId + 
+                ".timeseries.json?apiKey=" + apiKey;
+    const url2 = "https://disease.sh/v3/covid-19/states/" + provinceName;
+    let currentResp = {};
+    let graphResp = {};
 
     https.get(url, (response) => {
         let data = "";
@@ -68,45 +79,55 @@ app.post('/api/world', (req, res) => {
             let deaths = "";
             let recoveries = "";
             let activeCases = "";
-            let resp = {};
             const provinceData = JSON.parse(data);
-            // Goes through the data for each province. If the selected provinceName
-            // matches the current province in the data, it will save the cases and deaths
-            for(let i=0; i < provinceData.length; i++) {
-                if(provinceName === provinceData[i].state) {
-                    cases = provinceData[i].cases;
-                    deaths = provinceData[i].deaths;
-                    recoveries = provinceData[i].recovered;
-                    activeCases = provinceData[i].active;
+            cases = provinceData.actuals.cases;
+            deaths = provinceData.actuals.deaths;
 
-                    // Saves data for selected province in a JS Object
-                    resp = {
+            https.get(url2, (response) => {
+                data = "";
+
+                response.on("data", (chunk) => {
+                    data += chunk;
+                });
+                response.on("end", () => {
+                    const provinceData2 = JSON.parse(data);
+                    recoveries = provinceData2.recovered;
+                    activeCases = provinceData2.active;
+
+                    currentResp = {
                         province: provinceName,
                         cases: cases,
                         deaths: deaths,
                         recoveries: recoveries,
                         activeCases: activeCases
-                    }
-                    // Logs the full data for the province in the console (for debugging)
-                    console.log(provinceData[i]);
-                }
-            }
+                    };
+        
+                    graphResp = provinceData.actualsTimeseries;
+        
+                    console.log(currentResp);
 
-            // Sends the province name, cases, and deaths back to UsMap.js
-            res.send(resp);
+                    res.send({
+                        current: currentResp,
+                        graph: graphResp
+                    });
+
+                });
+            });
 
         });
+
     });
 
 });
 
+
+
+
+
+
 // For Production
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')));
-
-    // app.get('*', function(req, res) {
-    //     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-    // });
 }
 
 app.listen(port, () => console.log('Listening on port ' + port));

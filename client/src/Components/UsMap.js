@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import StateCard from './StateCard.js'
+import StateCard from './StateCard.js';
+import Graph from './Graph.js';
 
 function UsMap(props) {
 
@@ -13,16 +14,17 @@ function UsMap(props) {
     // Passes event (e) that has properties of the specific state clicked
     const handleClick = async e => {
         e.preventDefault();
-        // Saves the name of the state clicked as stateName
+        // Saves the id of the state clicked as stateId
+        let stateId = statesData[e.target.id].id;
         let stateName = statesData[e.target.id].name;
         // Calls the backend (server.js), POST request, inputting stateName
         // Returns response with data fetched from the API in server.js
-        const response = await fetch('/api/world', {
+        const response = await fetch('/api/current', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({post: stateName})
+            body: JSON.stringify({post: {stateId: stateId, stateName: stateName} })
         });
         const body = await response.text();
         let resp = JSON.parse(body);
@@ -61,27 +63,15 @@ function UsMap(props) {
                 }
                 </svg>
             </div>
+
             <div className="state-info">
+                <Graph className="graph" respo={responseToPost} />
                 <StateCard className="state-card" respo={responseToPost} />
             </div>
+
         </div>
         </>
     );
-
-
-
-
-
-    // // Should be component
-    // const formatting = resp => {
-    //     return (
-    //         <>
-    //             <b>{resp.province}: </b><br />
-    //             <p>Cases: {resp.cases.toLocaleString()} Deaths: {resp.deaths.toLocaleString()}</p>
-    //         </>
-    //     );
-    // };
-
 
 }
 
