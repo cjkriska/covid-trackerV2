@@ -14,13 +14,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
-// --------- NOT BEING USED -------------------------
+
 // --------------------------------------------------
 // The app.get function runs when '/api/hello' is requested from the browser.
 // It will return an array of province names (states)
 app.get('/api/hello', (req, res) => {
     // This is the Corona API url that the data is requested from
-    const url = "https://disease.sh/v2/states?sort=&yesterday=";
+    const apiKey = "98bcd96f014240558f710ccd0b52b612";
+    const url = "https://api.covidactnow.org/v2/states.json?apiKey=" + apiKey;
 
     https.get(url, (response) => {
         let data = "";
@@ -36,7 +37,14 @@ app.get('/api/hello', (req, res) => {
             // Goes through the covidData and gets only the province name and puts it
             // into an array (provinceList);
             for(let i=0; i < covidData.length; i++) {
-                provinceList.push(covidData[i].state);
+                provinceList.push({ 
+                    id: covidData[i].state,
+                    population: covidData[i].population,
+                    cases: covidData[i].actuals.cases,
+                    deaths: covidData[i].actuals.deaths,
+                    fullyVaccinated: covidData[i].actuals.vaccinationsCompleted,
+                    riskLevel: covidData[i].riskLevels.overall
+                });
             }
             // Sends the provinceList back to the front end, where it was called
             res.send(
@@ -75,13 +83,15 @@ app.post('/api/current', (req, res) => {
             data += chunk;
         });
         response.on("end", () => {
-            let cases = "";
-            let deaths = "";
             let recoveries = "";
             let activeCases = "";
+
             const provinceData = JSON.parse(data);
-            cases = provinceData.actuals.cases;
-            deaths = provinceData.actuals.deaths;
+            let cases = provinceData.actuals.cases;
+            let deaths = provinceData.actuals.deaths;
+            let fullyVaccinated = provinceData.actuals.vaccinationsCompleted;
+            let population = provinceData.population;
+            let riskLevel = provinceData.riskLevels.overall;
 
             https.get(url2, (response) => {
                 data = "";
@@ -99,7 +109,10 @@ app.post('/api/current', (req, res) => {
                         cases: cases,
                         deaths: deaths,
                         recoveries: recoveries,
-                        activeCases: activeCases
+                        activeCases: activeCases,
+                        fullyVaccinated: fullyVaccinated,
+                        population: population,
+                        riskLevel: riskLevel
                     };
         
                     graphResp = provinceData.actualsTimeseries;

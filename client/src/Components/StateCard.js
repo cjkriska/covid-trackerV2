@@ -11,7 +11,7 @@ function StateCard(props) {
 
     // Renames the inputted props.respo as its object properties:
     // province, cases, and deaths
-    const {province, cases, deaths, recoveries, activeCases} = props.respo.current;
+    const {province, cases, deaths, recoveries, activeCases, fullyVaccinated, population, riskLevel} = props.respo.current;
 
     // Renders the formatting for the State Card
     return (
@@ -22,7 +22,10 @@ function StateCard(props) {
                 <b>Cases:</b> {cases.toLocaleString()}<br />
                 <b>Deaths:</b> {deaths.toLocaleString()}<br />
                 <b>Recoveries:</b> {recoveries.toLocaleString()}<br />
-                <b>Active Cases:</b> {activeCases.toLocaleString()}
+                <b>Active Cases:</b> {activeCases.toLocaleString()}<br />
+                <b>Fully Vaccinated</b> {fullyVaccinated.toLocaleString()}<br />
+                <b>Population:</b> {population.toLocaleString()}<br />
+                <b>Risk Level:</b> {riskLevel}<br />
             </p>
         </div>
     );

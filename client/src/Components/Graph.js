@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
 // Renders formatting for Graph
 // Passes in covid data (props) and returns formatting for Graph
 function Graph(props) {
+
 
     // If there is no data, (state has not been clicked yet) returns nothing
     if(!props.respo) {
@@ -16,6 +17,8 @@ function Graph(props) {
     return (
       <>
         <h2>{stateName}</h2>
+        <button>Cases</button>
+        <button>Deaths</button>
         <LineChart
           width={400}
           height={250}
