@@ -96,3 +96,7 @@ hr {
 .buttons {
   margin-bottom: 10px;
 }
+
+.btn {
+  margin: 2px;
+}

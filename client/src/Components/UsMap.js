@@ -222,10 +222,10 @@ function UsMap(props) {
         <>
         <div className="main">
             <div className="buttons">
-                <button onClick={handleCasesClick}>Cases</button>
-                <button onClick={handleDeathsClick}>Deaths</button>
-                <button onClick={handleVaccinationsClick}>Vaccinations</button>
-                <button onClick={handleRiskLevelClick}>Risk Level</button>
+                <button className="btn" onClick={handleCasesClick}>Cases</button>
+                <button className="btn" onClick={handleDeathsClick}>Deaths</button>
+                <button className="btn" onClick={handleVaccinationsClick}>Vaccinations</button>
+                <button className="btn" onClick={handleRiskLevelClick}>Risk Level</button>
             </div>
             <div>{mapKey}</div>
             <div className="map"> 
