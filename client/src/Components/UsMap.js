@@ -10,6 +10,12 @@ function UsMap(props) {
     // Initializes response and responseToPost variable
     const [responseToPost, setResponseToPost] = useState('');
     const [response, setResponse] = useState('');
+
+    // Button states
+    const [casesButton, setCasesButton] = useState("btn btn-outline-secondary");
+    const [deathsButton, setDeathsButton] = useState("btn btn-outline-secondary");
+    const [vaccinationsButton, setVaccinationsButton] = useState("btn btn-outline-secondary");
+    const [riskLevelButton, setRiskLevelButton] = useState("btn btn-outline-secondary");
     
 
     useEffect(() => {
@@ -63,24 +69,40 @@ function UsMap(props) {
         const dataType = 'Cases';
         setMap(fillAllStatesColor(dataType));
         setMapKey(createMapKey(0, 14, dataType));
+        setCasesButton("btn btn-secondary");
+        setDeathsButton("btn btn-outline-secondary");
+        setVaccinationsButton("btn btn-outline-secondary");
+        setRiskLevelButton("btn btn-outline-secondary");
 
     };
     const handleDeathsClick = e => {
         const dataType = 'Deaths';
         setMap(fillAllStatesColor(dataType));
         setMapKey(createMapKey(0, 0.29, dataType));
+        setCasesButton("btn btn-outline-secondary");
+        setDeathsButton("btn btn-secondary");
+        setVaccinationsButton("btn btn-outline-secondary");
+        setRiskLevelButton("btn btn-outline-secondary");
 
     };
     const handleVaccinationsClick = e => {
         const dataType = 'Vaccinations';
         setMap(fillAllStatesColor(dataType));
         setMapKey(createMapKey(20, 40, dataType));
+        setCasesButton("btn btn-outline-secondary");
+        setDeathsButton("btn btn-outline-secondary");
+        setVaccinationsButton("btn btn-secondary");
+        setRiskLevelButton("btn btn-outline-secondary");
 
     };
     const handleRiskLevelClick = e => {
         const dataType = 'Risk Level';
         setMap(fillAllStatesColor(dataType));
         setMapKey(createMapKey(1, 5, dataType));
+        setCasesButton("btn btn-outline-secondary");
+        setDeathsButton("btn btn-outline-secondary");
+        setVaccinationsButton("btn btn-outline-secondary");
+        setRiskLevelButton("btn btn-secondary");
 
     };
 
@@ -89,7 +111,6 @@ function UsMap(props) {
 
 
     const fillStateColor = (id, dataType) => {
-        // Only Cases/Population for now
         let stateObject = {};
         for(let i=0; i < response.length; i++) {
             if(id === response[i].id) {
@@ -202,7 +223,7 @@ function UsMap(props) {
         }
         return (
             <>
-                <h3>{type}</h3>
+                <span className="type">{type}: </span>
                 <div className="map-key" style={style}>
                     <div className="map-key-min" style={riskStyle}><strong>{min + percent}</strong></div>
                     <div className="map-key-max"><strong>{max + percent}</strong></div>
@@ -222,12 +243,12 @@ function UsMap(props) {
         <>
         <div className="main">
             <div className="buttons">
-                <button className="btn" onClick={handleCasesClick}>Cases</button>
-                <button className="btn" onClick={handleDeathsClick}>Deaths</button>
-                <button className="btn" onClick={handleVaccinationsClick}>Vaccinations</button>
-                <button className="btn" onClick={handleRiskLevelClick}>Risk Level</button>
+                <button className={casesButton} onClick={handleCasesClick}>Cases</button>
+                <button className={deathsButton} onClick={handleDeathsClick}>Deaths</button>
+                <button className={vaccinationsButton} onClick={handleVaccinationsClick}>Vaccinations</button>
+                <button className={riskLevelButton} onClick={handleRiskLevelClick}>Risk Level</button>
+                {mapKey}
             </div>
-            <div>{mapKey}</div>
             <div className="map"> 
                 <svg width="90%" viewBox="0 0 960 600">
                     {map}

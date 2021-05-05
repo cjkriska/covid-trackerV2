@@ -1,5 +1,6 @@
 body {
   background-color: rgb(230, 238, 255);
+  /* background-color: #525252; */
 }
 
 .App {
@@ -49,11 +50,16 @@ body {
 .map {
   display: inline-block;
   width: 70%;
+  position: absolute;
+  left: 0;
+  top: 150px;
 }
 
 .state-info {
   display: inline-block;
   width: 30%;
+  position: absolute;
+  right: 0;
 }
 
 .state-card {
@@ -81,6 +87,9 @@ hr {
   display: inline-block;
   text-align: left;
   border-style: solid;
+  margin-left: 5px;
+  margin-right: 10px;
+
 }
 
 .map-key-min {
@@ -95,8 +104,96 @@ hr {
 
 .buttons {
   margin-bottom: 10px;
+  position: absolute;
+  left: 20px;
 }
 
+
+
+/* Popup CSS */
+.modal {
+  font-size: 12px;
+  background: #ffffff;
+}
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  margin: auto;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.title {
+  background-color: #8d99b1;
+  padding: 15px;
+  margin-top: 0;
+}
+
+.type {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+
+
+
+
+
+/* Button Classes */
+
 .btn {
-  margin: 2px;
+  margin: 5px;
+}
+
+.btn-secondary {
+  color: white;
+  background-color: rgb(202, 202, 202);
+  border: none;
+}
+
+.btn-outline-secondary {
+  background-color: rgba(202, 202, 202, 0.5);
+}
+
+.btn-info {
+  color: white;
+  background-color: rgb(93, 186, 240);
+  border: none;
+}
+
+.btn-outline-info {
+  background-color:rgba(93, 186, 240, 0.5);
+}
+
+.state-name-btn:hover {
+  background-color: rgba(93, 186, 240, 0.5);
 }

@@ -24,7 +24,7 @@ function App() {
     // Renders the UsMap component using the SVG image (statesData)
     return (
         <div className="App">
-            <h1 className="title">Covid Stats</h1>
+            <h1 className="title">Covid Tracker</h1>
             <UsMap statesData={statesData} />
         </div>
     );
