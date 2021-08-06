@@ -68,7 +68,7 @@ function UsMap(props) {
     const handleCasesClick = e => {
         const dataType = 'Cases';
         setMap(fillAllStatesColor(dataType));
-        setMapKey(createMapKey(0, 14, dataType));
+        setMapKey(createMapKey(0, 15, dataType));
         setCasesButton("btn btn-secondary");
         setDeathsButton("btn btn-outline-secondary");
         setVaccinationsButton("btn btn-outline-secondary");
@@ -88,7 +88,7 @@ function UsMap(props) {
     const handleVaccinationsClick = e => {
         const dataType = 'Vaccinations';
         setMap(fillAllStatesColor(dataType));
-        setMapKey(createMapKey(20, 40, dataType));
+        setMapKey(createMapKey(20, 90, dataType));
         setCasesButton("btn btn-outline-secondary");
         setDeathsButton("btn btn-outline-secondary");
         setVaccinationsButton("btn btn-secondary");
@@ -123,7 +123,7 @@ function UsMap(props) {
             case 'Cases':
                 x = (stateObject.cases / stateObject.population)*100;
                 console.log(x);
-                color = colorCompute(x, 0, 14, false);
+                color = colorCompute(x, 0, 15, false);
                 break;
             case 'Deaths':
                 x = (stateObject.deaths / stateObject.population)*100;
@@ -133,19 +133,19 @@ function UsMap(props) {
             case 'Vaccinations':
                 x = (stateObject.fullyVaccinated / stateObject.population)*100;
                 console.log(x);
-                color = colorCompute(x, 20, 40, true);
+                color = colorCompute(x, 20, 90, true);
                 break;
             case 'Risk Level':
                 console.log(stateObject.riskLevel);
-                if(stateObject.riskLevel === 0) {
+                if(stateObject.riskLevel === 1) {
                     color = 'rgb(0, 255, 150)';
-                } else if(stateObject.riskLevel === 1) {
-                    color = 'rgb(127, 255, 150)';
                 } else if(stateObject.riskLevel === 2) {
-                    color = 'rgb(255, 255, 150)';
+                    color = 'rgb(127, 255, 150)';
                 } else if(stateObject.riskLevel === 3) {
-                    color = 'rgb(255, 127, 150)';
+                    color = 'rgb(255, 255, 150)';
                 } else if(stateObject.riskLevel === 4) {
+                    color = 'rgb(255, 127, 150)';
+                } else if(stateObject.riskLevel === 5) {
                     color = 'rgb(255, 0, 150)';
                 }
                 break;

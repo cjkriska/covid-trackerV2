@@ -13,6 +13,11 @@ function StateCard(props) {
     // province, cases, and deaths
     const {province, cases, deaths, recoveries, activeCases, fullyVaccinated, population, riskLevel} = props.respo.current;
 
+    const calculateVaccinatedPercent = (vacc, pop) => {
+        let percent = (vacc/pop)*100;
+        return Math.floor(percent).toLocaleString();
+    };
+
     // Renders the formatting for the State Card
     return (
         <div className={props.className}>
@@ -25,6 +30,7 @@ function StateCard(props) {
                 <b>Active Cases:</b> {activeCases.toLocaleString()}<br />
                 <b>Fully Vaccinated</b> {fullyVaccinated.toLocaleString()}<br />
                 <b>Population:</b> {population.toLocaleString()}<br />
+                <b>Fully Vaccinated Percent: </b> {calculateVaccinatedPercent(fullyVaccinated, population)}%<br />
                 <b>Risk Level:</b> {riskLevel}<br />
             </p>
         </div>
